@@ -9,7 +9,8 @@ import openai
 import config
 
 app = Flask(__name__)
-openai.api_key = config.OPENAI_API_KEY
+# openai.api_key = config.OPENAI_API_KEY
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 messages = [
     {"role": "system", "content": "You are a helpful assistant. Keep your responses to all inputs less than 50 words. Do not say you are an AI language model. If you don't under the request, say 'I don't understand'. If you are asked to do something you can't do, say 'I can't do that'."},
@@ -32,7 +33,8 @@ def transcribe_audio_file(audio_file_path):
 
     system_message = response["choices"][0]["message"]["content"]
 
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{config.ADVISOR_VOICE_ID}/stream"
+    # url = f"https://api.elevenlabs.io/v1/text-to-speech/{config.ADVISOR_VOICE_ID}/stream"
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{os.environ['ADVISOR_VOICE_ID']}/stream"
     data = {
         "text": system_message.replace('"', ''),
         "voice_settings": {
@@ -41,7 +43,8 @@ def transcribe_audio_file(audio_file_path):
         }
     }
 
-    r = requests.post(url, headers={'xi-api-key': config.ELEVEN_LABS_API_KEY}, json=data)
+    # r = requests.post(url, headers={'xi-api-key': config.ELEVEN_LABS_API_KEY}, json=data)
+    r = requests.post(url, headers={'xi-api-key': os.environ['ELEVEN_LABS_API_KEY']}, json=data)
 
     output_filename = f"reply_{uuid.uuid4()}.mp3"
     with open(output_filename, "wb") as output:
