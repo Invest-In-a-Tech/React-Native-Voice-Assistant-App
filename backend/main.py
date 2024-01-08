@@ -11,7 +11,9 @@ from dotenv import find_dotenv, load_dotenv
 
 # Load environment variables
 load_dotenv(find_dotenv())
-openai.api_key = os.environ['OPENAI_API_KEY']
+openai_api_key = os.environ.get("OPENAI_API_KEY")
+elevenlabs_api_key = os.environ.get("ELEVENLABS_API_KEY")
+advisor_voice_id = os.environ.get("ADVISOR_VOICE_ID")
 
 app = Flask(__name__)
 messages = [
@@ -36,7 +38,7 @@ def transcribe_audio_file(audio_file_path):
     system_message = response["choices"][0]["message"]["content"]
 
     # url = f"https://api.elevenlabs.io/v1/text-to-speech/{config.ADVISOR_VOICE_ID}/stream"
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{os.environ['ADVISOR_VOICE_ID']}/stream"
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{advisor_voice_id}/stream"
     data = {
         "text": system_message.replace('"', ''),
         "voice_settings": {
@@ -46,7 +48,7 @@ def transcribe_audio_file(audio_file_path):
     }
 
     # r = requests.post(url, headers={'xi-api-key': config.ELEVEN_LABS_API_KEY}, json=data)
-    r = requests.post(url, headers={'xi-api-key': os.environ['ELEVEN_LABS_API_KEY']}, json=data)
+    r = requests.post(url, headers={'xi-api-key': elevenlabs_api_key}, json=data)
 
     output_filename = f"reply_{uuid.uuid4()}.mp3"
     with open(output_filename, "wb") as output:
