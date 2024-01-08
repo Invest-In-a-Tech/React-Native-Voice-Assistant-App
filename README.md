@@ -1,6 +1,6 @@
-# voice-assistant-app
-    
-    In addition to the React Native app code, there is a backend server code written in Python using Flask. The server code handles transcription of the uploaded audio file and generates a response using OpenAI's GPT-3.5-turbo model. It also converts the response text to speech using the Eleven Labs API.
+# Voice Assistant App
+
+This project encompasses a comprehensive voice assistant application using a React Native frontend and a Flask backend. The essence of the app lies in its ability to allow users to interact with an AI assistant through voice. Users can record audio messages, which are then processed by the server for transcription and response generation using OpenAI's GPT-3.5-turbo model. Additionally, the Eleven Labs API is employed to transform these responses into speech. The frontend, developed with React Native, provides a user-friendly interface displaying the conversation and managing audio interactions. The backend, powered by Flask, handles the core functionalities of audio processing, transcription, AI response generation, and speech conversion, ensuring a seamless user experience. Please note that is my first attempt at creating a full-stack application, and I am still learning the ropes. I would appreciate any feedback on how to improve the code and the overall project.
 
 
 ## Expo CLI to create a new React Native project:

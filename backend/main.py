@@ -6,12 +6,14 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from pydub import AudioSegment
 import openai
-import config
+import os
+from dotenv import find_dotenv, load_dotenv
 
-app = Flask(__name__)
-# openai.api_key = config.OPENAI_API_KEY
+# Load environment variables
+load_dotenv(find_dotenv())
 openai.api_key = os.environ['OPENAI_API_KEY']
 
+app = Flask(__name__)
 messages = [
     {"role": "system", "content": "You are a helpful assistant. Keep your responses to all inputs less than 50 words. Do not say you are an AI language model. If you don't under the request, say 'I don't understand'. If you are asked to do something you can't do, say 'I can't do that'."},
 ]
