@@ -73,7 +73,3 @@ This project integrates a React Native frontend with a Flask backend to create a
 ## Contributing
 
 Feedback and contributions are welcome. Please read our contributing guidelines for more information.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
